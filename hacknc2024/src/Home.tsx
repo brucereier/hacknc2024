@@ -50,6 +50,7 @@ const Home: React.FC = () => {
       alignItems="flex-start"
       justifyContent="flex-start"
       p={0}
+      paddingTop="8"
     >
       <Tabs.Root
         value={value}
@@ -82,10 +83,10 @@ const Home: React.FC = () => {
           </Tabs.Trigger>
         </Tabs.List>
 
-        <Tabs.Content value="first" style={{ width: '100%' }}>
+        <Tabs.Content value="first">
           <EventFeed feedType="global" events={events} />
         </Tabs.Content>
-        <Tabs.Content value="second" style={{ width: '100%' }}>
+        <Tabs.Content value="second">
           <EventFeed feedType="local" events={events} />
         </Tabs.Content>
       </Tabs.Root>
