@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Text, Flex, Image, Spinner, VStack } from '@chakra-ui/react';
-
+import { Box, Text, Flex, Image, Spinner, VStack, Tabs } from '@chakra-ui/react';
+import {colors} from './config';
 interface EventData {
     id: number;
     title: string;
@@ -48,6 +48,7 @@ const events: EventData[] = [
 
 const EventPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
+    const [value, setValue] = useState<string | null>('first');
     const [event, setEvent] = useState<EventData | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
@@ -77,7 +78,7 @@ const EventPage: React.FC = () => {
     });
 
     return (
-        <Box p={8} maxWidth="800px" margin="0 auto">
+        <Box p={8} margin="0 auto">
             <VStack>
                 {/* First Box - Existing Content */}
                 <Box
@@ -86,6 +87,7 @@ const EventPage: React.FC = () => {
                     boxShadow="2xl"
                     w="100%"
                     p={8}
+                    mb={4}
                 >
                     <Flex
                         direction={{ base: 'column', md: 'row' }}
@@ -128,13 +130,58 @@ const EventPage: React.FC = () => {
                     w="100%"
                     p={8}
                 >
-                    {/* Add your new content here */}
-                    <Text fontSize="2xl" color="white">
-                        Additional Information
-                    </Text>
-                    <Text fontSize="lg" color="gray.300">
-                        This is where you can add more details about the event.
-                    </Text>
+                    <Flex
+                        direction="column"
+                        minHeight="100vh"
+                        width="100%"
+                        alignItems="flex-start"
+                        justifyContent="flex-start"
+                        p={0}
+                        paddingTop="5"
+                        >
+                        <Tabs.Root
+                            value={value}
+                            onValueChange={(e) => setValue(e.value)}
+                            variant="plain"
+                            style={{ width: '100%' }}
+                        >
+                            <Tabs.List
+                            justifyContent="center"
+                            style={{ width: '100%', marginTop: 0 }}
+                            >
+                            <Tabs.Trigger
+                                value="first"
+                                _selected={{ color: colors.secondary }}
+                                mr={2}
+                                fontSize="2xl" // Increased font size
+                                px={6}         // Added horizontal padding
+                                py={4}         // Added vertical padding
+                            >
+                                Chat
+                            </Tabs.Trigger>
+                            <Tabs.Trigger
+                                value="second"
+                                _selected={{ color: colors.secondary }}
+                                fontSize="2xl"
+                                px={6}
+                                py={4}
+                            >
+                                Pictures
+                            </Tabs.Trigger>
+                            </Tabs.List>
+
+                            <Tabs.Content value="first">
+                                <Box>
+                                    shitstain
+                                </Box>
+                            </Tabs.Content>
+                            <Tabs.Content value="second">
+                                <Box>
+                                    yeah bruh
+                                </Box>
+                            </Tabs.Content>
+                        </Tabs.Root>
+                        </Flex>
                 </Box>
             </VStack>
         </Box>
