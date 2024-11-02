@@ -3,14 +3,14 @@ import React, { ReactNode} from 'react';
 import { Box } from '@chakra-ui/react';
 
 interface Props {
-    children: ReactNode;
-    destination?: string
+    name: ReactNode;
+    src: string
 }
 
-const Avatar = ({}: Props) => {
+const Avatar = ({name, src}: Props) => {
     return(
         <Box>
-
+            name
         </Box>
     );
 };

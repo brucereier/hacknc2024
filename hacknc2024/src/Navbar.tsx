@@ -4,6 +4,7 @@
 
 import React, { ReactNode } from "react";
 import { colors } from './config';
+import Avatar from './Avatar';
 
 import {
     Box,
@@ -17,8 +18,6 @@ import {
     Link,
     TextProps,
 } from '@chakra-ui/react'
-
-import { Avatar } from "@chakra-ui/avatar";
 
 import { HamburgerIcon, CloseIcon } from '@chakra-ui/icons'
 
@@ -61,7 +60,7 @@ const Navbar: React.FC = () => {
                         ></MenuItem>
                     ))}
 
-                    <Avatar src={'/logo.png'} />
+                    <Avatar name="Abel Lu" src={'/logo.png'} />
                 </Stack>
             </Flex>
         </Box>
