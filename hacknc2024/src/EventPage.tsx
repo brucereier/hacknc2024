@@ -1,8 +1,6 @@
-// EventPage.tsx
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Text, Flex, Image, Spinner, Tabs} from '@chakra-ui/react';
-import {colors} from './config';
+import { Box, Text, Flex, Image, Spinner, VStack } from '@chakra-ui/react';
 
 interface EventData {
     id: number;
@@ -78,45 +76,68 @@ const EventPage: React.FC = () => {
         minute: '2-digit',
     });
 
-    const [value, setValue] = useState<string | null>('first');
-
     return (
-        
-        <Flex
-            direction="column"
-            minHeight="100vh"
-            width="100%"
-            alignItems="flex-start"
-            justifyContent="flex-start"
-            p={8}
-        >
-            {/* Event Details Box */}
-            <Box width="100%" maxWidth="800px" bg="gray.800" borderRadius="lg" boxShadow="2xl" p={8} mb={8}>
-                <Flex direction={{ base: 'column', md: 'row' }} alignItems="center">
-                    <Image
-                        height="300px"
-                        width="300px"
-                        objectFit="cover"
-                        src={event.imageUrl}
-                        alt={event.title}
-                        borderRadius="lg"
-                        mr={{ md: 6 }}
-                        mb={{ base: 4, md: 0 }}
-                    />
-                    <Box flex="1" textAlign={{ base: 'center', md: 'left' }}>
-                        <Text fontSize="4xl" fontWeight="bold" color="white" mb={4}>
-                            {event.title}
-                        </Text>
-                        <Text fontSize="lg" color="gray.300" mb={4}>
-                            {event.description}
-                        </Text>
-                        <Text fontSize="lg" color="gray.500">
-                            {dateString} at {timeString}
-                        </Text>
-                    </Box>
-                </Flex>
-            </Box>
-        </Flex>
+        <Box p={8} maxWidth="800px" margin="0 auto">
+            <VStack>
+                {/* First Box - Existing Content */}
+                <Box
+                    bg="gray.800"
+                    borderRadius="lg"
+                    boxShadow="2xl"
+                    w="100%"
+                    p={8}
+                >
+                    <Flex
+                        direction={{ base: 'column', md: 'row' }}
+                        alignItems="center"
+                    >
+                        <Image
+                            height="300px"
+                            width="300px"
+                            objectFit="cover"
+                            src={event.imageUrl}
+                            alt={event.title}
+                            borderRadius="lg"
+                            mr={{ md: 6 }}
+                            mb={{ base: 4, md: 0 }}
+                        />
+                        <Box flex="1" textAlign={{ base: 'center', md: 'left' }}>
+                            <Text
+                                fontSize="4xl"
+                                fontWeight="bold"
+                                color="white"
+                                mb={4}
+                            >
+                                {event.title}
+                            </Text>
+                            <Text fontSize="lg" color="gray.300" mb={4}>
+                                {event.description}
+                            </Text>
+                            <Text fontSize="lg" color="gray.500">
+                                {dateString} at {timeString}
+                            </Text>
+                        </Box>
+                    </Flex>
+                </Box>
+
+                {/* Second Box - New Content */}
+                <Box
+                    bg="gray.800"
+                    borderRadius="lg"
+                    boxShadow="2xl"
+                    w="100%"
+                    p={8}
+                >
+                    {/* Add your new content here */}
+                    <Text fontSize="2xl" color="white">
+                        Additional Information
+                    </Text>
+                    <Text fontSize="lg" color="gray.300">
+                        This is where you can add more details about the event.
+                    </Text>
+                </Box>
+            </VStack>
+        </Box>
     );
 };
 
