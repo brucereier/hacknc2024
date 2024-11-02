@@ -39,10 +39,10 @@ const MenuItem = ({ children, destination = "/", ...rest }: Props) => {
 
 const Navbar: React.FC = () => {
     return (
-        <Box paddingInline="8" bg={colors.secondary} width="100%" left="0" top="0">
+        <Box paddingInline="8" bg={colors.tertiary} width="100%" left="0" top="0">
             <Flex h={16} alignItems="center" justifyContent="space-between">
                 {/* Logo */}
-                <Box fontWeight={"bold"} color={colors.tertiary}>Logo</Box>
+                <Box fontWeight={"bold"} color={colors.primary}>Logo</Box>
 
                 {/* Links */}
                 <Stack direction="row">
