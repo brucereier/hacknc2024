@@ -4,7 +4,8 @@
 
 import React, { ReactNode } from "react";
 import { colors } from './config';
-import Avatar from './Avatar';
+import { Avatar } from "./components/ui/avatar"
+
 
 import {
     Box,
@@ -31,7 +32,7 @@ const Links = ['Home', 'About', 'Settings']
 const MenuItem = ({ children, destination = "/", ...rest }: Props) => {
     return (
         <Link href={destination}>
-            <Text display="block" {...rest}>
+            <Text display="block" textStyle="lg" fontWeight="semibold" {...rest}>
             {children}
             </Text>
         </Link>
