@@ -1,6 +1,5 @@
-// Event.tsx
 import React from 'react';
-import { Box, Image, Text, Flex} from '@chakra-ui/core';
+import { Box, Text, Flex, Image } from '@chakra-ui/react';
 
 interface EventProps {
   event: {
@@ -15,38 +14,56 @@ interface EventProps {
 
 const Event: React.FC<EventProps> = ({ event }) => {
   const eventDate = new Date(event.date);
-  const dateString = eventDate.toLocaleDateString([], { year: 'numeric', month: 'long', day: 'numeric' });
-  const timeString = eventDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const dateString = eventDate.toLocaleDateString([], {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+  const timeString = eventDate.toLocaleTimeString([], {
+    hour: '2-digit',
+    minute: '2-digit',
+  });
 
-  // Adjust background color based on the color mode (light or dark)
   return (
     <Box
-      bg={'#1a1a1a'}
+      bg="#1a1a1a"
       borderRadius="lg"
       boxShadow="lg"
       overflow="hidden"
       mb={4}
+      width="100%"
       p={4}
     >
-      <Flex align="center">
+      <Flex align="center" width="100%">
         <Image
-          size="100px"
+          height="160px"
+          width="160px"
           objectFit="cover"
           src={event.imageUrl}
           alt={event.title}
           borderRadius="md"
           mr={4}
         />
-        <Box flex="1">
-          <Text fontWeight="bold" fontSize="lg" mb={1}>
-            {event.title}
-          </Text>
-          <Text fontSize="sm" color="gray.500" mb={2}>
-            {dateString} at {timeString}
-          </Text>
-          <Text fontSize="md" color="gray.600">
-            {event.description}
-          </Text>
+        <Box
+          flex="1"
+          display="flex"
+          flexDirection="column"
+          height="180px" // Set height to match the image
+        >
+          <Box mt={-2}>
+            <Text fontWeight="bold" fontSize="lg" mb={0} textAlign="left">
+              {event.title}
+            </Text>
+            <Text fontSize="md" color="gray.500" textAlign="left" mt={0}>
+              {event.description}
+            </Text>
+          </Box>
+          <Box mt="auto" textAlign="right">
+            <Text fontSize="sm">
+                {dateString} at {timeString}
+            </Text>
+          </Box>
+
         </Box>
       </Flex>
     </Box>
