@@ -5,7 +5,7 @@ import Navbar from './Navbar';
 import Profile from './Profile';
 import Settings from './Settings';
 import About from './About';
-import Event from './Event';
+import EventPage from './EventPage'; // Import the EventPage component
 import { Box, Flex } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ function App() {
                       <Route path="/profile" element={<Profile />} />
                       <Route path="/settings" element={<Settings />} />
                       <Route path="/about" element={<About />} />
-                      {/* Add other routes as needed */}
+                      <Route path="/event/:id" element={<EventPage />} /> {/* Dynamic Event route */}
                   </Routes>
               </Box>
             </Flex>
