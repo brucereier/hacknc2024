@@ -26,6 +26,7 @@ const Event: React.FC<EventProps> = ({ event }) => {
 
   return (
     <Box
+      as="button" // Make the entire Box clickable
       bg="#1a1a1a"
       borderRadius="lg"
       boxShadow="lg"
@@ -33,22 +34,27 @@ const Event: React.FC<EventProps> = ({ event }) => {
       mb={4}
       width="90%"
       p={4}
+      transition="transform 0.2s ease" // Smooth scaling transition
+      _hover={{ transform: 'scale(1.03)' }} // Scale up on hover
+      _focus={{ transform: 'scale(1.03)', boxShadow: 'outline' }} // Scale up and add focus outline
     >
       <Flex width="100%">
-        <Image
-          height="160px"
-          width="160px"
-          objectFit="cover"
-          src={event.imageUrl}
-          alt={event.title}
-          borderRadius="md"
-          mr={4}
-        />
+        <Flex alignItems="center">
+          <Image
+            height="160px"
+            width="160px"
+            objectFit="cover"
+            src={event.imageUrl}
+            alt={event.title}
+            borderRadius="md"
+            mr={4}
+          />
+        </Flex>
         <Box
           flex="1"
           display="flex"
           flexDirection="column"
-          height="180px" // Set height to match the image
+          height="170px" // Set height to match the image
         >
           <Box mt={-2}>
             <Text fontWeight="bold" fontSize="lg" mb={0} textAlign="left">
@@ -60,10 +66,9 @@ const Event: React.FC<EventProps> = ({ event }) => {
           </Box>
           <Box mt="auto" textAlign="right">
             <Text fontSize="sm">
-                {dateString} at {timeString}
+              {dateString} at {timeString}
             </Text>
           </Box>
-
         </Box>
       </Flex>
     </Box>
