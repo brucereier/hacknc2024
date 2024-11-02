@@ -50,7 +50,7 @@ const Home: React.FC = () => {
       alignItems="flex-start"
       justifyContent="flex-start"
       p={0}
-      paddingTop="5"
+      paddingTop="8"
     >
       <Tabs.Root
         value={value}

@@ -10,6 +10,7 @@ import { Box, Flex } from '@chakra-ui/react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
+
     return (
         <Router>
             <Box position="fixed" top="0" left="0" width="100vw">
@@ -31,4 +32,4 @@ function App() {
     );
 }
 
-export default App;
+export default App
