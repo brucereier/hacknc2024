@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 import Event from './Event';
 
 interface EventData {
@@ -26,10 +26,12 @@ const EventFeed: React.FC<EventFeedProps> = ({ feedType, events }) => {
   });
 
   return (
-    <Box width="70vw"> {/* Ensures the feed spans the entire width */}
-      {sortedEvents.map(event => (
-        <Event key={event.id} event={event} />
-      ))}
+    <Box width="100%"> {/* Ensures the feed spans the entire width */}
+      <Flex direction="column" alignItems="center">
+        {sortedEvents.map(event => (
+          <Event key={event.id} event={event}/>
+        ))}
+      </Flex>
     </Box>
   );
 };

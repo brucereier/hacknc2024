@@ -31,10 +31,10 @@ const Event: React.FC<EventProps> = ({ event }) => {
       boxShadow="lg"
       overflow="hidden"
       mb={4}
-      width="100%"
+      width="90%"
       p={4}
     >
-      <Flex align="center" width="100%">
+      <Flex width="100%">
         <Image
           height="160px"
           width="160px"
