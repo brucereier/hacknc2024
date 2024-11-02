@@ -17,7 +17,7 @@ function App() {
                 <Navbar />
             </Box>
             <Flex alignContent="center">
-              <Box mt={7} width="90vw"> {/* Adjust margin to avoid overlap with Navbar */}
+              <Box mt={30} width="90vw"> {/* Adjust margin to avoid overlap with Navbar */}
                   <Routes>
                       <Route path="/" element={<Navigate to="/home" replace />} />
                       <Route path="/home" element={<Home />} />
