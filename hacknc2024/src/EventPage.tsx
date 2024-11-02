@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Text, Flex, Image, Spinner, VStack, Tabs } from '@chakra-ui/react';
 import {colors} from './config';
+import Chat from './Chat';
 interface EventData {
     id: number;
     title: string;
@@ -171,9 +172,7 @@ const EventPage: React.FC = () => {
                             </Tabs.List>
 
                             <Tabs.Content value="first">
-                                <Box>
-                                    shitstain
-                                </Box>
+                                <Chat/>
                             </Tabs.Content>
                             <Tabs.Content value="second">
                                 <Box>
