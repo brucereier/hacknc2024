@@ -1,7 +1,6 @@
-// EventFeed.tsx
 import React from 'react';
-import { Box } from '@chakra-ui/core';
-import Event from './Event'; // Assuming you have an Event component
+import { Box } from '@chakra-ui/react';
+import Event from './Event';
 
 interface EventData {
   imageUrl: string;
@@ -9,7 +8,7 @@ interface EventData {
   description: string;
   isGlobal: boolean;
   id: string | number;
-  date: string; // ISO date string, e.g., "2023-11-03T12:00:00Z"
+  date: string;
 }
 
 interface EventFeedProps {
@@ -18,20 +17,16 @@ interface EventFeedProps {
 }
 
 const EventFeed: React.FC<EventFeedProps> = ({ feedType, events }) => {
-  // Filter events based on the feedType prop
   const filteredEvents = events.filter(event =>
     feedType === 'global' ? event.isGlobal : !event.isGlobal
   );
 
-  // Sort the filtered events by date (soonest to latest)
   const sortedEvents = filteredEvents.sort((a, b) => {
-    const dateA = new Date(a.date).getTime();
-    const dateB = new Date(b.date).getTime();
-    return dateA - dateB;
+    return new Date(a.date).getTime() - new Date(b.date).getTime();
   });
 
   return (
-    <Box>
+    <Box width="70vw"> {/* Ensures the feed spans the entire width */}
       {sortedEvents.map(event => (
         <Event key={event.id} event={event} />
       ))}
