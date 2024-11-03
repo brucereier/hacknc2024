@@ -97,6 +97,27 @@ def get_post(post_id: int):
         
         return post
 
+@app.get("/events/{event_id}/posts/", response_model=list[Post])
+def get_posts_by_event(event_id: int):
+    with Session(engine) as session:
+        statement = select(Post).where(Post.event_id == event_id)
+        posts = session.exec(statement).all()
+        
+        if posts is None:
+            raise HTTPException(status_code=404, detail="Post not found")
+        
+        return posts
+    
+@app.get("/users/{user_id}/posts/", response_model=list[Post])
+def get_posts_by_event(user_id: int):
+    with Session(engine) as session:
+        statement = select(Post).where(Post.user_id == user_id)
+        posts = session.exec(statement).all()
+        
+        if posts is None:
+            raise HTTPException(status_code=404, detail="Post not found")
+        
+        return posts
 
 @app.get("/")
 def read_root():

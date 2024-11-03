@@ -1,5 +1,5 @@
 // Pictures.tsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Box,
   Image,
@@ -18,37 +18,15 @@ interface User {
 
 interface Picture {
   id: number;
-  imageUrl: string;
-  userId: number;
-  eventId: number;
+  photo_url: string;
+  user_id: number;
+  event_id: number;
 }
 
 interface PicturesProps {
-  userId?: number;
-  eventId?: number;
+  kind: "user" | "event"
+  id: number;
 }
-
-const dummyPictures: Picture[] = [
-  {
-    id: 1,
-    imageUrl: 'https://bit.ly/2Z4KKcF',
-    userId: 1,
-    eventId: 1,
-  },
-  {
-    id: 2,
-    imageUrl: 'https://bit.ly/3nG5Y2z',
-    userId: 2,
-    eventId: 1,
-  },
-  {
-    id: 3,
-    imageUrl: 'https://bit.ly/3qLb1d1',
-    userId: 1,
-    eventId: 2,
-  },
-  // Add more pictures with various userIds and eventIds
-];
 
 const users: User[] = [
   {
@@ -64,7 +42,8 @@ const users: User[] = [
   // Add more users as needed
 ];
 
-const Pictures: React.FC<PicturesProps> = ({ userId, eventId }) => {
+const Pictures: React.FC<PicturesProps> = ({ kind, id }) => {
+  const [pictures, setPictures] = useState<Array<Picture>>([])
   const [selectedPicture, setSelectedPicture] = useState<Picture | null>(null);
 
   const handleClick = (picture: Picture) => {
@@ -75,25 +54,57 @@ const Pictures: React.FC<PicturesProps> = ({ userId, eventId }) => {
     setSelectedPicture(null);
   };
 
-  // Filter pictures based on userId or eventId
-  const filteredPictures = dummyPictures.filter((picture) => {
-    if (userId) {
-      return picture.userId === userId;
-    }
-    if (eventId) {
-      return picture.eventId === eventId;
-    }
-    return true; // If neither userId nor eventId is provided, show all pictures
-  });
+  async function getPicturesByUser() {
+    try {
+      const res = await fetch("http://127.0.0.1:8000/users/" + id + "/posts")
+      const data = await res.json()
+      setPictures(data)
+    } catch {
 
-  // Function to get user info based on userId
+    }
+
+  }
+
+  async function getPicturesByEvent() {
+    try {
+      const res = await fetch("http://127.0.0.1:8000/events/" + id + "/posts")
+      const data = await res.json()
+      setPictures(data)
+    } catch {
+
+    }
+  }
+
+  useEffect(() => {
+    console.log("starting")
+    if (kind === "user") {
+      getPicturesByUser()
+    }
+    if (kind === "event") {
+      getPicturesByEvent()
+    }
+    console.log(pictures)
+  }, [])
+
+  // Filter pictures based on user_id or event_id
+  // const filteredPictures = dummyPictures.filter((picture) => {
+  //   if (user_id) {
+  //     return picture.user_id === user_id;
+  //   }
+  //   if (event_id) {
+  //     return picture.event_id === event_id;
+  //   }
+  //   return true; // If neither user_id nor event_id is provided, show all pictures
+  // });
+
+  // Function to get user info based on user_id
   const getUserById = (id: number) => users.find((user) => user.id === id);
 
   return (
     <Box>
       {/* Grid of Pictures */}
       <Grid templateColumns="repeat(3, 1fr)" gap={4}>
-        {filteredPictures.map((picture) => (
+        {pictures.map((picture) => (
           <Box
             key={picture.id}
             cursor="pointer"
@@ -102,7 +113,7 @@ const Pictures: React.FC<PicturesProps> = ({ userId, eventId }) => {
             onClick={() => handleClick(picture)}
           >
             <Image
-              src={picture.imageUrl}
+              src={picture.photo_url}
               alt={`Picture ${picture.id}`}
               objectFit="cover"
               width="100%"
@@ -137,7 +148,7 @@ const Pictures: React.FC<PicturesProps> = ({ userId, eventId }) => {
           >
             {/* Image */}
             <Image
-              src={selectedPicture.imageUrl}
+              src={selectedPicture.photo_url}
               alt={`Picture ${selectedPicture.id}`}
               objectFit="contain"
               width="100%"
@@ -149,13 +160,13 @@ const Pictures: React.FC<PicturesProps> = ({ userId, eventId }) => {
               {/* Avatar and Username */}
               <Flex alignItems="center">
                 <Avatar
-                  src={getUserById(selectedPicture.userId)?.profilePicUrl}
-                  name={getUserById(selectedPicture.userId)?.username}
+                  src={getUserById(selectedPicture.user_id)?.profilePicUrl}
+                  name={getUserById(selectedPicture.user_id)?.username}
                   size="md"
                   mr={2}
                 />
                 <Text color="white" fontWeight="bold">
-                  {getUserById(selectedPicture.userId)?.username}
+                  {getUserById(selectedPicture.user_id)?.username}
                 </Text>
               </Flex>
               {/* Close Button */}

@@ -86,7 +86,7 @@ const Profile: React.FC = () => {
           w="100%"
           p={6}
         >
-          <Pictures userId={user.id} />
+          <Pictures kind="user" id={user.id} />
         </Box>
       </Stack>
     </Box>
