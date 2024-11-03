@@ -4,8 +4,10 @@ A service for astronomy enjoyers to come together and share pictures about their
 
 # Images
 
+![image](https://github.com/user-attachments/assets/77576c0d-eec6-414c-8fc8-1994836eb736)
 ![image](https://github.com/user-attachments/assets/2d99fdbc-7859-4f3a-a2e0-377fd76a607a)
 ![image](https://github.com/user-attachments/assets/a30ea32c-d1a3-42c4-9a28-4a0ec58e3844)
+![image](https://github.com/user-attachments/assets/9fc9ee69-bf8d-4003-b057-b86e90364c02)
 
 # The Why
 Beginner astronomers often find it difficult to get their foot in the door when it comes to astrophotography. We wanted to build a platform dedicated to helping astronomy enthusiasts find community.
