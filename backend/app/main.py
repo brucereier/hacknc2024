@@ -31,6 +31,7 @@ async def lifespan(app: FastAPI):
 app = FastAPI(lifespan=lifespan)
 
 origins = [
+    "http://127.0.0.1:8000/chats/",
     "http://localhost.tiangolo.com",
     "https://localhost.tiangolo.com",
     "http://localhost",
@@ -41,9 +42,10 @@ origins = [
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
-    allow_credentials=True,
+    # allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=['Allow-Access-Control-Origin']
 )
 
 
@@ -183,24 +185,35 @@ def get_chats_by_event(event_id: int):
         return chats_list
     
 
-@app.get("/chats/{chat_id}", response_model=Chat)
+@app.get("/chats/{chat_id}", response_model=dict)
 def get_chat_by_id(chat_id: int):
     with Session(engine) as session:
         statement = select(Chat).where(Chat.id == chat_id)
         chat = session.exec(statement).first()
+
+        chat_dict = chat.dict()
+        event_info = chat.event.dict()
+        chat_dict["event"] = event_info
+        user_info = chat.user.dict()
+        chat_dict["user"] = user_info
         
-        if chat is None:
+        if chat_dict is None:
             raise HTTPException(status_code=404, detail="Chat not found")
         
-        return chat
+        return chat_dict
     
-@app.post("/chats/")
+@app.post("/chats/", response_model=dict)
 def create_chat(chat: Chat):
     with Session(engine) as session:
         session.add(chat)
         session.commit()
         session.refresh(chat)
-        return chat
+        chat_dict = chat.dict()
+        event_info = chat.event.dict()
+        chat_dict["event"] = event_info
+        user_info = chat.user.dict()
+        chat_dict["user"] = user_info
+        return chat_dict
 
 
 @app.get("/")
