@@ -79,7 +79,8 @@ const Home: React.FC = () => {
         >
           <Tabs.Trigger
             value="first"
-            _selected={{ color: colors.secondary }}
+            _selected={{ color: colors.secondary, borderColor: colors.secondary }}
+            _hover={{ borderColor: colors.secondary }}
             mr={2}
             fontSize="2xl" // Increased font size
             px={6}         // Added horizontal padding
@@ -89,7 +90,8 @@ const Home: React.FC = () => {
           </Tabs.Trigger>
           <Tabs.Trigger
             value="second"
-            _selected={{ color: colors.secondary }}
+            _selected={{ color: colors.secondary, borderColor: colors.secondary }}
+            _hover={{ borderColor: colors.secondary }}
             fontSize="2xl"
             px={6}
             py={4}
