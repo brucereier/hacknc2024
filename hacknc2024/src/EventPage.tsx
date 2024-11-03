@@ -188,7 +188,10 @@ const EventPage: React.FC = () => {
                             </Tabs.List>
 
                             <Tabs.Content value="first">
-                                <Chat/>
+                                {
+                                    id &&
+                                    <Chat eventId={parseInt(id)}></Chat>
+                                }
                             </Tabs.Content>
                             <Tabs.Content value="second">
                                 {
