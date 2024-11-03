@@ -51,5 +51,5 @@ class Chat(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     user_id: Optional[int] = Field(default=None, foreign_key="user.id")
     event_id: Optional[int] = Field(default=None, foreign_key="event.id")
-    text: str = Field(..., max_length=500)
+    text: str = Field(..., max_length=1000)
     timestamp: datetime = Field(default_factory=datetime.utcnow)

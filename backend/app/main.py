@@ -7,7 +7,7 @@ from sqlmodel import Session, create_engine, SQLModel, select
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import joinedload, selectinload
 
-from app.models.models import Event, Post
+from app.models.models import Event, Post, User, Chat
 
 from dotenv import load_dotenv
 
@@ -118,6 +118,63 @@ def get_posts_by_event(user_id: int):
             raise HTTPException(status_code=404, detail="Post not found")
         
         return posts
+    
+@app.get("/users/", response_model=list[User])
+def get_users():
+    with Session(engine) as session:
+        statement = select(User)
+        users = session.exec(statement).all()
+        
+        if users is None:
+            raise HTTPException(status_code=404, detail="Post not found")
+        
+        return users
+    
+@app.get("/users/{user_id}", response_model=User)
+def get_users_by_id(user_id: int):
+    with Session(engine) as session:
+        statement = select(User).where(User.id == user_id)
+        user = session.exec(statement).first()
+        
+        if user is None:
+            raise HTTPException(status_code=404, detail="User not found")
+        
+        return user
+    
+@app.get("/chats/users/{user_id}", response_model=list[Chat])
+def get_chats_by_user(user_id: int):
+    with Session(engine) as session:
+        statement = select(Chat).where(Chat.user_id == user_id)
+        chats = session.exec(statement).all()
+        
+        if chats is None:
+            raise HTTPException(status_code=404, detail="Chats not found")
+        
+        return chats
+    
+@app.get("/chats/events/{event_id}", response_model=list[Chat])
+def get_chats_by_event(event_id: int):
+    with Session(engine) as session:
+        statement = select(Chat).where(Chat.event_id == event_id)
+        chats = session.exec(statement).all()
+        
+        if chats is None:
+            raise HTTPException(status_code=404, detail="Chats not found")
+        
+        return chats
+    
+
+@app.get("/chats/{chat_id}", response_model=Chat)
+def get_chats_by_id(chat_id: int):
+    with Session(engine) as session:
+        statement = select(Chat).where(Chat.id == chat_id)
+        chat = session.exec(statement).first()
+        
+        if chat is None:
+            raise HTTPException(status_code=404, detail="Chat not found")
+        
+        return chat
+
 
 @app.get("/")
 def read_root():
