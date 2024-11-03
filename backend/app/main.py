@@ -24,7 +24,7 @@ engine = create_engine(DATABASE_URL)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # SQLModel.metadata.drop_all(engine)
+    SQLModel.metadata.drop_all(engine)
     SQLModel.metadata.create_all(engine)
     yield
 
@@ -173,6 +173,14 @@ def get_chats_by_id(chat_id: int):
         if chat is None:
             raise HTTPException(status_code=404, detail="Chat not found")
         
+        return chat
+    
+@app.post("/chats/")
+def create_chat(chat: Chat):
+    with Session(engine) as session:
+        session.add(chat)
+        session.commit()
+        session.refresh(chat)
         return chat
 
 
