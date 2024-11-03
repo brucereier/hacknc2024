@@ -13,6 +13,7 @@ class User(SQLModel, table=True):
     avatar_url: str = Field(..., max_length=255)
     posts: List["Post"] = Relationship(back_populates="poster")
     likes: List["Post"] = Relationship(back_populates="liked_by", link_model=Like)
+    chats: List["Chat"] = Relationship(back_populates="user")
 
 class Post(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -46,6 +47,7 @@ class Event(SQLModel, table=True):
     longitude: Optional[float] = Field(default=None)
     country: Optional[str] = Field(default=None, max_length=100)
     posts: List["Post"] = Relationship(back_populates="event")
+    chats: List["Chat"] = Relationship(back_populates="event")
 
 class Chat(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -53,3 +55,5 @@ class Chat(SQLModel, table=True):
     event_id: Optional[int] = Field(default=None, foreign_key="event.id")
     text: str = Field(..., max_length=1000)
     timestamp: datetime = Field(default_factory=datetime.utcnow)
+    user: User = Relationship(back_populates="chats")
+    event: Event = Relationship(back_populates="chats")

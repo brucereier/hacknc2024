@@ -141,31 +141,50 @@ def get_users_by_id(user_id: int):
         
         return user
     
-@app.get("/chats/users/{user_id}", response_model=list[Chat])
+@app.get("/chats/users/{user_id}", response_model=list)
 def get_chats_by_user(user_id: int):
     with Session(engine) as session:
-        statement = select(Chat).where(Chat.user_id == user_id)
+        statement = select(Chat).where(Chat.user_id == user_id).options(selectinload(Chat.user))
         chats = session.exec(statement).all()
+
+        chats_list = []
+        for chat in chats:
+            chat_dict = chat.dict()
+            event_info = chat.event.dict()
+            chat_dict["event"] = event_info
+            user_info = chat.user.dict()
+            chat_dict["user"] = user_info
+            chats_list.append(chat_dict)
         
-        if chats is None:
+        if chats_list is None:
             raise HTTPException(status_code=404, detail="Chats not found")
         
-        return chats
+        return chats_list
     
-@app.get("/chats/events/{event_id}", response_model=list[Chat])
+@app.get("/chats/events/{event_id}", response_model=list)
 def get_chats_by_event(event_id: int):
     with Session(engine) as session:
-        statement = select(Chat).where(Chat.event_id == event_id)
+        statement = select(Chat).where(Chat.event_id == event_id).options(selectinload(Chat.event))
         chats = session.exec(statement).all()
+
+        chats_list = []
+        for chat in chats:
+            print("hello")
+            chat_dict = chat.dict()
+            event_info = chat.event.dict()
+            chat_dict["event"] = event_info
+            user_info = chat.user.dict()
+            chat_dict["user"] = user_info
+            chats_list.append(chat_dict)
         
-        if chats is None:
+        if chats_list is None:
             raise HTTPException(status_code=404, detail="Chats not found")
         
-        return chats
+        return chats_list
     
 
 @app.get("/chats/{chat_id}", response_model=Chat)
-def get_chats_by_id(chat_id: int):
+def get_chat_by_id(chat_id: int):
     with Session(engine) as session:
         statement = select(Chat).where(Chat.id == chat_id)
         chat = session.exec(statement).first()
