@@ -1,16 +1,10 @@
-import React from 'react';
 import {
-  ChakraProvider,
   Box,
   Heading,
   Text,
   Button,
   VStack,
-  HStack,
-  Grid,
-  Image,
   SimpleGrid,
-  useBreakpointValue,
   Link
 } from '@chakra-ui/react';
 
@@ -76,33 +70,21 @@ const About = () => {
   );
 };
 
-const FeatureCard = ({ title, description }) => {
-  return (
-    <Box p={5} shadow="md" borderWidth="1px" borderRadius="md">
-      <Heading size="lg">{title}</Heading>
-      <Text mt={4}>{description}</Text>
-    </Box>
-  );
-};
+interface FeatureCardProps {
+    title: string;
+    description: string;
+}
 
-const PricingCard = ({ title, price, features }) => {
-  return (
-    <Box p={5} shadow="md" borderWidth="1px" borderRadius="md">
-      <Heading size="xl">{title}</Heading>
-      <Text fontSize="2xl" mt={4}>
-        {price}
-      </Text>
-      <Text mt={4}>Features:</Text>
-      <VStack align="start" spacing={2}>
-        {features.map((feature, index) => (
-          <Text key={index}>- {feature}</Text>
-        ))}
-      </VStack>
-      <Button mt={4} colorScheme="teal">
-        Sign Up
-      </Button>
-    </Box>
-  );
+const FeatureCard = (props: FeatureCardProps) => {
+
+    const { title, description } = props
+
+    return (
+        <Box p={5} shadow="md" borderWidth="1px" borderRadius="md">
+        <Heading size="lg">{title}</Heading>
+        <Text mt={4}>{description}</Text>
+        </Box>
+    );
 };
 
 export default About;
