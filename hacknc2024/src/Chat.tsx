@@ -10,8 +10,7 @@ import {
   HStack,
   Spacer,
 } from '@chakra-ui/react';
-import { Avatar } from "@chakra-ui/avatar"
-
+import { Avatar } from './components/ui/avatar';
 
 interface User {
   id: number;
@@ -66,37 +65,9 @@ const Chat: React.FC = () => {
   // Functionality to handle message sending will go here in the future
 
   return (
-    <Box w="100%" maxW="800px" mx="auto" bg="gray.800" borderRadius="lg" p={4}>
+    <Box w="100%" maxW="800px" mx="auto" bg="gray.800" borderRadius="lg" p={4} zIndex={-1}>
       <VStack align="stretch">
-        {/* Chat Messages */}
-        {messages
-          .slice()
-          .sort(
-            (a, b) =>
-              new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
-          )
-          .map((msg) => (
-            <Flex key={msg.id} align="flex-start">
-              <Avatar src={msg.user.profilePicUrl} name={msg.user.username} size="xs"/>
-              <Box ml={3} flex="1">
-                <HStack>
-                  <Text fontWeight="bold" color="white">
-                    {msg.user.username}
-                  </Text>
-                  <Text fontSize="sm" color="gray.500">
-                    {new Date(msg.timestamp).toLocaleTimeString([], {
-                      hour: '2-digit',
-                      minute: '2-digit',
-                    })}
-                  </Text>
-                </HStack>
-                <Text color="gray.300">{msg.message}</Text>
-              </Box>
-            </Flex>
-          ))}
-
-        {/* Message Input */}
-        <Spacer />
+        {/* Message Input - Moved to the top */}
         <Flex as="form" onSubmit={(e) => e.preventDefault()}>
           <Input
             placeholder="Type your message..."
@@ -108,6 +79,41 @@ const Chat: React.FC = () => {
           />
           <Button colorScheme="blue">Send</Button>
         </Flex>
+
+        {/* Chat Messages */}
+        <VStack align="stretch">
+          {messages
+            .slice()
+            .sort(
+              (a, b) =>
+                new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime()
+            )
+            .map((msg) => (
+              <Flex key={msg.id} align="flex-start">
+                <Avatar
+                  src={msg.user.profilePicUrl}
+                  name={msg.user.username}
+                  size="lg"
+                />
+                <Box ml={3} flex="1">
+                  <HStack alignItems="baseline">
+                    <Text fontWeight="bold" color="white">
+                      {msg.user.username}
+                    </Text>
+                    <Text fontSize="sm" color="gray.500">
+                      {new Date(msg.timestamp).toLocaleTimeString([], {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                      })}
+                    </Text>
+                  </HStack>
+                  <Text color="gray.300" textAlign="left">
+                    {msg.message}
+                  </Text>
+                </Box>
+              </Flex>
+            ))}
+        </VStack>
       </VStack>
     </Box>
   );

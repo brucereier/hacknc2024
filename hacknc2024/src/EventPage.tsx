@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Box, Text, Flex, Image, Spinner, VStack, Tabs } from '@chakra-ui/react';
+import { Box, Text, Flex, Image, VStack, Tabs } from '@chakra-ui/react';
 import {colors} from './config';
 import Chat from './Chat';
+import Pictures from './Pictures';
+
 interface EventData {
     id: number;
     title: string;
@@ -60,7 +62,9 @@ const EventPage: React.FC = () => {
     }, [id]);
 
     if (loading) {
-        return <Spinner size="xl" />;
+        return <Box>
+            Loading...
+        </Box>;
     }
 
     if (!event) {
@@ -89,6 +93,7 @@ const EventPage: React.FC = () => {
                     w="100%"
                     p={8}
                     mb={4}
+                    zIndex={-2}
                 >
                     <Flex
                         direction={{ base: 'column', md: 'row' }}
@@ -139,6 +144,7 @@ const EventPage: React.FC = () => {
                         justifyContent="flex-start"
                         p={0}
                         paddingTop="5"
+                        zIndex={-1}
                         >
                         <Tabs.Root
                             value={value}
@@ -175,9 +181,7 @@ const EventPage: React.FC = () => {
                                 <Chat/>
                             </Tabs.Content>
                             <Tabs.Content value="second">
-                                <Box>
-                                    yeah bruh
-                                </Box>
+                                <Pictures/>
                             </Tabs.Content>
                         </Tabs.Root>
                         </Flex>
