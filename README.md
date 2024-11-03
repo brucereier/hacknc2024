@@ -2,6 +2,10 @@
 
 A service for astronomy enjoyers to come together and share pictures about their passion.
 
+# Why
+Beginner astronomers often find it difficult to get their foot in the door when it comes to astrophotography. We wanted to build a platform dedicated to helping astronomy enthusiasts find community.
+Astraloq is an event calendar, photo sharing platform, and discussion forum for astral events and community get-togethers. Users have the ability to attend events and connect with fellow attendees. Additionally, users can share and view photos of the events they're attending as another means to engage with the astronomy community.
+
 # How Its Made
 _React, Typescript, FastAPI, PostgreSQL, Chakra-UI, VSCode_
 
