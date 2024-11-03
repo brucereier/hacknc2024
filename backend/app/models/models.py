@@ -11,15 +11,20 @@ class User(SQLModel, table=True):
     username: str = Field(..., max_length=50)
     password: str = Field(..., max_length=128)
     avatar_url: str = Field(..., max_length=255)
+    posts: List["Post"] = Relationship(back_populates="poster")
     likes: List["Post"] = Relationship(back_populates="liked_by", link_model=Like)
 
 class Post(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     event_id: Optional[int] = Field(default=None, foreign_key="event.id")
-    photo_url: str = Field(..., max_length=255) 
+    user_id: Optional[int] = Field(default=None, foreign_key="user.id")
+    photo_url: str = Field(..., max_length=1000) 
     text: str = Field(..., max_length=500)
     event: Optional["Event"] = Relationship(back_populates="posts")
+    poster: "User" = Relationship(back_populates="posts")
     liked_by: List["User"] = Relationship(back_populates="likes", link_model=Like)
+    timestamp: datetime = Field()
+
     comments: List["Comment"] = Relationship(back_populates="post")
 
 
@@ -32,7 +37,7 @@ class Comment(SQLModel, table=True):
 
 class Event(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    image_url: str = Field(..., max_length=255)
+    image_url: str = Field(..., max_length=1000)
     title: str = Field(..., max_length=255)
     description: Optional[str] = Field(default=None)
     is_global: bool
