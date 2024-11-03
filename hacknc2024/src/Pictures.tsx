@@ -7,6 +7,7 @@ import {
   Text,
   Flex,
   Button,
+  Link,
 } from '@chakra-ui/react';
 import { Avatar } from './components/ui/avatar';
 
@@ -159,15 +160,17 @@ const Pictures: React.FC<PicturesProps> = ({ kind, id }) => {
             <Flex alignItems="center" justifyContent="space-between" mb={4}>
               {/* Avatar and Username */}
               <Flex alignItems="center">
-                <Avatar
-                  src={getUserById(selectedPicture.user_id)?.profilePicUrl}
-                  name={getUserById(selectedPicture.user_id)?.username}
-                  size="md"
-                  mr={2}
-                />
-                <Text color="white" fontWeight="bold">
-                  {getUserById(selectedPicture.user_id)?.username}
-                </Text>
+                <Link href={"/profile/" + id}>
+                    <Avatar
+                    src={getUserById(selectedPicture.user_id)?.profilePicUrl}
+                    name={getUserById(selectedPicture.user_id)?.username}
+                    size="md"
+                    mr={2}
+                    />
+                    <Text color="white" fontWeight="bold">
+                    {getUserById(selectedPicture.user_id)?.username}
+                    </Text>
+                </Link>
               </Flex>
               {/* Close Button */}
               <Button colorScheme="red" onClick={handleClose}>
