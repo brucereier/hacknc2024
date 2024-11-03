@@ -41,7 +41,7 @@ const MenuItem = ({ children, destination = "/", ...rest }: Props) => {
 
 const Navbar: React.FC = () => {
     return (
-        <Box paddingInline="8" paddingY="4" bg={colors.primary} width="100%" left="0" top="0">
+        <Box paddingInline="8" paddingY="4" bg={colors.primary} width="100%" left="0" top="0" zIndex={1000}>
             <Flex h={16} alignItems="center" justifyContent="space-between">
                 {/* Logo */}
                 <Box>
