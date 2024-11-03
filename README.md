@@ -1,4 +1,4 @@
-E# Astraloq
+# Astraloq
 A service for astronomy enjoyers to come together and share pictures about their passion.
 
 # Images
