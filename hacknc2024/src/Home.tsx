@@ -1,46 +1,61 @@
 // Home.tsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Tabs, Flex } from '@chakra-ui/react';
 import { colors } from './config';
 import EventFeed from './EventFeed';
 
-const events = [
-    {
-        imageUrl: 'https://bit.ly/naruto-sage',
-        title: 'Local Event 1',
-        description: 'Description of Local Event 1',
-        isGlobal: false,
-        id: 1,
-        date: '2023-11-01T10:00:00Z',
-      },
-      {
-        imageUrl: 'https://bit.ly/naruto-sage',
-        title: 'Global Event 1',
-        description: 'Description of Global Event 1',
-        isGlobal: true,
-        id: 2,
-        date: '2023-11-03T12:00:00Z',
-      },
-      {
-        imageUrl: 'https://bit.ly/naruto-sage',
-        title: 'Local Event 2',
-        description: 'Description of Local Event 2',
-        isGlobal: false,
-        id: 3,
-        date: '2023-10-30T09:00:00Z',
-      },
-      {
-        imageUrl: 'https://bit.ly/naruto-sage',
-        title: 'Global Event 2',
-        description: 'Description of Global Event 2',
-        isGlobal: true,
-        id: 4,
-        date: '2023-11-02T14:00:00Z',
-      },
-];
+// const events = [
+//     {
+//         imageUrl: 'https://bit.ly/naruto-sage',
+//         title: 'Local Event 1',
+//         description: 'Description of Local Event 1',
+//         isGlobal: false,
+//         id: 1,
+//         date: '2023-11-01T10:00:00Z',
+//       },
+//       {
+//         imageUrl: 'https://bit.ly/naruto-sage',
+//         title: 'Global Event 1',
+//         description: 'Description of Global Event 1',
+//         isGlobal: true,
+//         id: 2,
+//         date: '2023-11-03T12:00:00Z',
+//       },
+//       {
+//         imageUrl: 'https://bit.ly/naruto-sage',
+//         title: 'Local Event 2',
+//         description: 'Description of Local Event 2',
+//         isGlobal: false,
+//         id: 3,
+//         date: '2023-10-30T09:00:00Z',
+//       },
+//       {
+//         imageUrl: 'https://bit.ly/naruto-sage',
+//         title: 'Global Event 2',
+//         description: 'Description of Global Event 2',
+//         isGlobal: true,
+//         id: 4,
+//         date: '2023-11-02T14:00:00Z',
+//       },
+// ];
 
 const Home: React.FC = () => {
   const [value, setValue] = useState<string | null>('first');
+  const [events, setEvents] = useState<Array<any>>([]);
+
+  async function getEvents() {
+    try {
+        const res = await fetch("http://127.0.0.1:8000/events")
+        const data = await res.json()
+        setEvents(data)
+    } catch {
+
+    }
+  }
+
+  useEffect(() => {
+    getEvents()
+  }, [])
 
   return (
     <Flex

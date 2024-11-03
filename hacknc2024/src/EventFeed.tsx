@@ -3,10 +3,10 @@ import { Box, Flex } from '@chakra-ui/react';
 import Event from './Event';
 
 interface EventData {
-  imageUrl: string;
+  image_url: string;
   title: string;
   description: string;
-  isGlobal: boolean;
+  is_global: boolean;
   id: string | number;
   date: string;
 }
@@ -18,7 +18,7 @@ interface EventFeedProps {
 
 const EventFeed: React.FC<EventFeedProps> = ({ feedType, events }) => {
   const filteredEvents = events.filter(event =>
-    feedType === 'global' ? event.isGlobal : !event.isGlobal
+    feedType === 'global' ? event.is_global : !event.is_global
   );
 
   const sortedEvents = filteredEvents.sort((a, b) => {

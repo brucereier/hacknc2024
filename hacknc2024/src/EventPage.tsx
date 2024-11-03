@@ -10,44 +10,44 @@ interface EventData {
     title: string;
     description: string;
     date: string;
-    imageUrl: string;
-    isGlobal: boolean;
+    image_url: string;
+    is_global: boolean;
 }
 
-const events: EventData[] = [
-    {
-        imageUrl: 'https://bit.ly/naruto-sage',
-        title: 'Local Event 1',
-        description: 'Description of Local Event 1',
-        isGlobal: false,
-        id: 1,
-        date: '2023-11-01T10:00:00Z',
-    },
-    {
-        imageUrl: 'https://bit.ly/naruto-sage',
-        title: 'Global Event 1',
-        description: 'Description of Global Event 1',
-        isGlobal: true,
-        id: 2,
-        date: '2023-11-03T12:00:00Z',
-    },
-    {
-        imageUrl: 'https://bit.ly/naruto-sage',
-        title: 'Local Event 2',
-        description: 'Description of Local Event 2',
-        isGlobal: false,
-        id: 3,
-        date: '2023-10-30T09:00:00Z',
-    },
-    {
-        imageUrl: 'https://bit.ly/naruto-sage',
-        title: 'Global Event 2',
-        description: 'Description of Global Event 2',
-        isGlobal: true,
-        id: 4,
-        date: '2023-11-02T14:00:00Z',
-    },
-];
+// const events: EventData[] = [
+//     {
+//         imageUrl: 'https://bit.ly/naruto-sage',
+//         title: 'Local Event 1',
+//         description: 'Description of Local Event 1',
+//         isGlobal: false,
+//         id: 1,
+//         date: '2023-11-01T10:00:00Z',
+//     },
+//     {
+//         imageUrl: 'https://bit.ly/naruto-sage',
+//         title: 'Global Event 1',
+//         description: 'Description of Global Event 1',
+//         isGlobal: true,
+//         id: 2,
+//         date: '2023-11-03T12:00:00Z',
+//     },
+//     {
+//         imageUrl: 'https://bit.ly/naruto-sage',
+//         title: 'Local Event 2',
+//         description: 'Description of Local Event 2',
+//         isGlobal: false,
+//         id: 3,
+//         date: '2023-10-30T09:00:00Z',
+//     },
+//     {
+//         imageUrl: 'https://bit.ly/naruto-sage',
+//         title: 'Global Event 2',
+//         description: 'Description of Global Event 2',
+//         isGlobal: true,
+//         id: 4,
+//         date: '2023-11-02T14:00:00Z',
+//     },
+// ];
 
 const EventPage: React.FC = () => {
     const { id } = useParams<{ id: string }>();
@@ -55,11 +55,21 @@ const EventPage: React.FC = () => {
     const [event, setEvent] = useState<EventData | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
+    async function getEvent() {
+        setLoading(true)
+        try {
+            const res = await fetch("http://127.0.0.1:8000/events/" + id)
+            const data = await res.json()
+            setEvent(data)
+        } catch {
+
+        }
+        setLoading(false)
+    }
+
     useEffect(() => {
-        const fetchedEvent = events.find((event) => event.id === parseInt(id || '', 10));
-        setEvent(fetchedEvent || null);
-        setLoading(false);
-    }, [id]);
+        getEvent()
+    }, []);
 
     if (loading) {
         return <Box>
@@ -103,7 +113,7 @@ const EventPage: React.FC = () => {
                             height="300px"
                             width="300px"
                             objectFit="cover"
-                            src={event.imageUrl}
+                            src={event.image_url}
                             alt={event.title}
                             borderRadius="lg"
                             mr={{ md: 6 }}

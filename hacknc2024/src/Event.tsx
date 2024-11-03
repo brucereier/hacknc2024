@@ -5,10 +5,10 @@ import { Box, Text, Flex, Image } from '@chakra-ui/react';
 
 interface EventProps {
     event: {
-        imageUrl: string;
+        image_url: string;
         title: string;
         description: string;
-        isGlobal: boolean;
+        is_global: boolean;
         id: string | number;
         date: string;
     };
@@ -53,7 +53,7 @@ const Event: React.FC<EventProps> = ({ event }) => {
                         height="160px"
                         width="160px"
                         objectFit="cover"
-                        src={event.imageUrl}
+                        src={event.image_url}
                         alt={event.title}
                         borderRadius="md"
                         mr={4}
