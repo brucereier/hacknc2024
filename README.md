@@ -1,5 +1,5 @@
 # Astraloq
-A service for astronomy enjoyers to come together and share pictures about their passion.
+Community building for anyone passionate about astronomy!
 
 # Images
 ![image](https://github.com/user-attachments/assets/77576c0d-eec6-414c-8fc8-1994836eb736)
@@ -26,9 +26,9 @@ Some key features we're particularly proud of include:
 - Global and local events calendar
 
 # Future Improvements
-We're very proud of what we've been able to accomplish within the 24 hour time limit, so here are some features that we'd love to add in the future.
+We're very proud of what we've accomplished within the 24 hour time limit, so here are some features that we'd love to add in the future.
 
 1. Cloud Cover Display
-- When users view an event, there will be an icon and text explaining the weather forecast of both the time and place of the event.
+- When users view an event, there will be an icon and text explaining the weather forecast of the event's time and place.
 2. Light Pollution Display
-- When users view an event, there will be a link that will bring them to a view of the light pollution Bortle level at and around the location of the event 
+- When users view an event, there will be a link that will bring them to a view of the light pollution Bortle level at and around the location of the event.
