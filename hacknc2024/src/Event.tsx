@@ -36,7 +36,7 @@ const Event: React.FC<EventProps> = ({ event }) => {
         <Box
             as="button" // Make the entire Box clickable
             onClick={handleClick} // Add onClick to handle navigation
-            bg="#1a1a1a"
+            bg="gray.800"
             borderRadius="lg"
             boxShadow="lg"
             overflow="hidden"
