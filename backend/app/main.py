@@ -24,7 +24,7 @@ engine = create_engine(DATABASE_URL)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    SQLModel.metadata.drop_all(engine)
+    # SQLModel.metadata.drop_all(engine)
     SQLModel.metadata.create_all(engine)
     yield
 
