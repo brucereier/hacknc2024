@@ -30,7 +30,7 @@ const About = () => {
             SkyTogether
           </Heading>
           <Text fontSize="lg" mb={8}>
-            Meetups and chatrooms for astronomy enthusiasts.
+            Connect with fellow astronomy enthusiasts.
           </Text>
           <Link href="/">
             <Button size="lg" colorScheme="teal" color="white" bgColor={colors.primary}>
