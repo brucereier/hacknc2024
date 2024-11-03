@@ -45,8 +45,14 @@ const Navbar: React.FC = () => {
             <Flex h={16} alignItems="center" justifyContent="space-between">
                 {/* Logo */}
                 <Link href="/">
-                    <Box>
-                        <img src="/logo_isolated.png"></img>
+                    <Stack direction="row">
+                        <Box>
+                            <img src="/logo_isolated.png"></img>
+                        </Box>
+                    </Stack>
+
+                    <Box fontFamily="Audiowide" fontSize={37} alignContent={"center"} color="#FFFFFF">
+                        Astraloq
                     </Box>
                 </Link>
 

@@ -20,11 +20,11 @@ const About = () => {
             color="white"
             width="100%"
         >
-          <Heading as="h1" size="2xl" mb={4}>
-            SkyTogether
+          <Heading as="h1" size="2xl" mb={4} fontFamily="Audiowide">
+            Astraloq
           </Heading>
           <Text fontSize="lg" mb={8}>
-            Connect with fellow astronomy enthusiasts.
+            Short for Astra Conloquia - Latin for 'talks of the stars'.
           </Text>
           <Link href="/">
             <Button size="lg" colorScheme="teal" color="white" bgColor={colors.primary}>
