@@ -22,6 +22,7 @@ function App() {
                       <Route path="/" element={<Navigate to="/home" replace />} />
                       <Route path="/home" element={<Home />} />
                       <Route path="/profile" element={<Profile />} />
+                      <Route path="/profile/:id" element={<Profile />} /> {/* Dynamic Profile route */}
                       <Route path="/settings" element={<Settings />} />
                       <Route path="/about" element={<About />} />
                       <Route path="/event/:id" element={<EventPage />} /> {/* Dynamic Event route */}
