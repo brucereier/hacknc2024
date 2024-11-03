@@ -8,6 +8,7 @@ import {
   Button,
   VStack,
   HStack,
+  Link,
 } from '@chakra-ui/react';
 import { Avatar } from './components/ui/avatar';
 
@@ -132,16 +133,20 @@ const Chat: React.FC<ChatProps> = ({ userId, eventId }) => {
             )
             .map((msg) => (
               <Flex key={msg.id} align="flex-start">
-                <Avatar
-                  src={msg?.user?.avatar_url || 'https://bit.ly/naruto-sage'}
-                  name={msg?.user?.username}
-                  size="lg"
-                />
+                <Link href={"/profile/" + msg.user.id}>
+                  <Avatar
+                    src={msg?.user?.avatar_url || 'https://bit.ly/naruto-sage'}
+                    name={msg?.user?.username}
+                    size="lg"
+                  />
+                </Link>
                 <Box ml={3} flex="1">
                   <HStack alignItems="baseline">
-                    <Text fontWeight="bold" color="white">
-                      {msg?.user?.username}
-                    </Text>
+                    <Link href={"/profile/" + msg.user.id}>
+                      <Text fontWeight="bold" color="white">
+                        {msg?.user?.username}
+                      </Text>
+                    </Link>
                     <Text fontSize="sm" color="gray.500">
                       {new Date(msg.timestamp).toLocaleTimeString([], {
                         hour: '2-digit',
