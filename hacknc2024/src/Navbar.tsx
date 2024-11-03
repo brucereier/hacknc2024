@@ -27,7 +27,7 @@ interface Props extends TextProps {
     destination?: string
 }
 
-const Links = ['Home', 'About', 'Settings']
+const Links = ['About']
 
 const MenuItem = ({ children, destination = "/", ...rest }: Props) => {
     return (
@@ -44,11 +44,11 @@ const Navbar: React.FC = () => {
         <Box paddingInline="8" paddingY="4" bg={colors.primary} width="100%" left="0" top="0" zIndex={1000}>
             <Flex h={16} alignItems="center" justifyContent="space-between">
                 {/* Logo */}
-                <Box>
-                    <Link href="/">
+                <Link href="/">
+                    <Box>
                         <img src="/logo_isolated.png"></img>
-                    </Link>
-                </Box>
+                    </Box>
+                </Link>
 
                 {/* Links */}
                 <Stack direction="row">
@@ -62,8 +62,9 @@ const Navbar: React.FC = () => {
                         paddingInline={8}
                         ></MenuItem>
                     ))}
-
+                    <Link href={`/profile/1`}>
                     <Avatar name="Abel Lu" />
+                    </Link>
                 </Stack>
             </Flex>
         </Box>

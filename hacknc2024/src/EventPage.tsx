@@ -181,7 +181,7 @@ const EventPage: React.FC = () => {
                                 <Chat/>
                             </Tabs.Content>
                             <Tabs.Content value="second">
-                                <Pictures/>
+                                <Pictures eventId={1} />
                             </Tabs.Content>
                         </Tabs.Root>
                         </Flex>
