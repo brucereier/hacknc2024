@@ -13,11 +13,11 @@ function App() {
 
     return (
         <Router>
-            <Box position="fixed" top="0" left="0" width="100vw">
+            <Box position="fixed" top="0" left="0" width="100vw" zIndex={10}>
                 <Navbar />
             </Box>
             <Flex alignContent="center">
-              <Box mt={30} width="90vw"> {/* Adjust margin to avoid overlap with Navbar */}
+              <Box mt={30} width="100vw"> {/* Adjust margin to avoid overlap with Navbar */}
                   <Routes>
                       <Route path="/" element={<Navigate to="/home" replace />} />
                       <Route path="/home" element={<Home />} />

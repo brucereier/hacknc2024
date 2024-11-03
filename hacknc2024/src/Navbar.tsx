@@ -61,7 +61,7 @@ const Navbar: React.FC = () => {
                         ></MenuItem>
                     ))}
 
-                    <Avatar name="Abel Lu" src={'/logo_isolated.png'} />
+                    <Avatar name="Abel Lu" />
                 </Stack>
             </Flex>
         </Box>
